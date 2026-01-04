@@ -44,7 +44,14 @@ target_include_directories(glad PUBLIC
 # =========================
 set(SOURCES
 		src/main.cpp
-		src/Engine/Engine.cpp
+		src/Engine.cpp
+		src/Shader.cpp
+		src/Material.cpp
+		src/Object.cpp
+		src/Scene.cpp
+		src/Transform.cpp
+		src/Mesh.cpp
+		src/Mesh.h
 )
 
 add_executable(RenderingEngine ${SOURCES})

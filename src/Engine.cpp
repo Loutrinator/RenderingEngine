@@ -11,6 +11,7 @@ std::unique_ptr<Engine> Engine::instance = std::make_unique<Engine>();
 
 
 Engine::Engine() {
+    scene = Scene();
 }
 
 ///Preparing the engine to run
@@ -66,7 +67,17 @@ int Engine::initWindow(int width, int height, bool debug) {
     return 1;
 }
 
+bool Engine::preRun() {
+
+}
+
 void Engine::run() {
+
+    Mesh mesh = Mesh();
+    Material material = Material();
+    Object triangle = Object(mesh, material, glm::vec3(0,1,0), glm::vec3(0,0,0), glm::vec3(1,1,1));
+
+    scene.addObject(&triangle);
 
     std::cout<<"Running the engine\n";
     // Main loop
