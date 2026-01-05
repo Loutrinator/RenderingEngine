@@ -6,6 +6,7 @@
 #include <iostream>
 #include <memory>
 
+#include "Camera.h"
 #include "Shader.h"
 
 
@@ -98,10 +99,12 @@ void Engine::run()
     float redShininess = 256;
     Material redMaterial(&shader, redAmbient, redDiffuse, redSpecular, redShininess);
 
-    Object rect = Object(rectMesh, redMaterial, glm::vec3(0.7,0.5,0), glm::vec3(0,0,0), glm::vec3(1,1,1));
+    Object rect = Object(rectMesh, redMaterial, glm::vec3(0.0,0.0,0), glm::vec3(0,0.0,0), glm::vec3(1,1,1));
 
     scene.addObject(&rect);
 
+    Camera cam = Camera(100.0f, glm::vec3(-0.0f, 0.0f, -5.0f));
+    scene.setCamera(&cam);
 
     std::cout<<"Running the engine\n";
     // Main loop
@@ -111,8 +114,9 @@ void Engine::run()
         glClear(GL_COLOR_BUFFER_BIT);
 
         shader.bind();
-        scene.drawScene();
+        cam.update();
 
+        scene.drawScene();
 
         glfwSwapBuffers(window);
         glfwPollEvents();

@@ -52,6 +52,8 @@ set(SOURCES
 		src/Transform.cpp
 		src/Mesh.cpp
 		src/Utils/FileReader.cpp
+		src/Camera.cpp
+		src/Camera.h
 )
 
 add_executable(RenderingEngine ${SOURCES})

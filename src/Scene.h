@@ -6,6 +6,7 @@
 #define RENDERINGENGINE_SCENE_H
 #include <vector>
 
+#include "Camera.h"
 #include "Object.h"
 
 
@@ -14,12 +15,16 @@ public:
     Scene();
     void addObject(Object* obj);
     bool removeObject(Object* obj);
+    void setCamera(Camera * cam);
 
     void drawScene();
 
     std::vector<Object*>* getObjects();
+
+
 private:
     std::vector<Object*> _objects;
+    Camera* _camera;
 };
 
 

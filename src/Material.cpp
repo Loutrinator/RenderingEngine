@@ -13,3 +13,10 @@ void Material::bind() {
     //_shader->setVec3("material.specular",_specular);
     //_shader->setFloat("material.shininess",_shininess);
 }
+
+Shader* Material::getShader() {
+    return _shader;
+}
+void Material::setMat4(const std::string& name, glm::mat4 value) const {
+    _shader->setMat4(name, value);
+}
