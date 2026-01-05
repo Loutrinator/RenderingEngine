@@ -5,8 +5,19 @@
 #ifndef RENDERINGENGINE_MATERIAL_H
 #define RENDERINGENGINE_MATERIAL_H
 
+#include "Shader.h"
+#include "glm/glm.hpp"
 
 class Material {
+public:
+    Material(Shader* shader, const glm::vec3 &ambient, const glm::vec3 &diffuse, const glm::vec3 &specular, float shininess);
+    void bind();
+private:
+    Shader* _shader;
+    const glm::vec3& _ambient;
+    const glm::vec3& _diffuse;
+    const glm::vec3& _specular;
+    float _shininess;
 };
 
 

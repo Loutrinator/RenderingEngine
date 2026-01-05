@@ -23,6 +23,9 @@ public:
     Engine();
 
 private:
+
+    void oldTest();
+
     int initWindow(int width, int height, bool debug);
     bool preRun();
     void loadScene(Scene* scene);

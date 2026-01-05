@@ -4,20 +4,22 @@
 
 #ifndef RENDERINGENGINE_OBJECT_H
 #define RENDERINGENGINE_OBJECT_H
+
 #include "Material.h"
 #include "Mesh.h"
 #include "Transform.h"
-#include "glm/vec3.hpp"
+#include "glm/glm.hpp"
 
 
 class Object {
 public:
     Object(Mesh& mesh, Material&, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
+    void draw();
 
     private:
-    Mesh& mesh;
-    Material& material;
-    Transform transform;
+    Mesh& _mesh;
+    Material& _material;
+    Transform _transform;
 };
 
 

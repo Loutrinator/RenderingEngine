@@ -51,7 +51,7 @@ set(SOURCES
 		src/Scene.cpp
 		src/Transform.cpp
 		src/Mesh.cpp
-		src/Mesh.h
+		src/Utils/FileReader.cpp
 )
 
 add_executable(RenderingEngine ${SOURCES})
@@ -77,3 +77,6 @@ elseif (WIN32)
 else()
 	target_link_libraries(RenderingEngine GL)
 endif()
+
+add_custom_command(TARGET RenderingEngine PRE_BUILD
+		COMMAND robocopy ${PROJECT_SOURCE_DIR}/resources/ ${PROJECT_BINARY_DIR}/resources /E /NS /NC /NFL /NDL /NP /NJH /NJS  || cmd /c "exit /b 0")

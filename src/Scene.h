@@ -14,9 +14,12 @@ public:
     Scene();
     void addObject(Object* obj);
     bool removeObject(Object* obj);
+
+    void drawScene();
+
     std::vector<Object*>* getObjects();
 private:
-    std::vector<Object*> objects;
+    std::vector<Object*> _objects;
 };
 
 
