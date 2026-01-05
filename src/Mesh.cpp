@@ -9,12 +9,19 @@
 Mesh::Mesh() {
 
     glGenVertexArrays(1, &_vao); //Creating the Vertex array buffer
+
     bind(); //binding it to the GPU
 
     //Telling the GPU how to read the VBO by indicating in the VAO what are its attributes
     glVertexAttribFormat(0, 3, GL_FLOAT, GL_FALSE, 0);//The param is 3 float long, it will contain the position of the vertice
     glEnableVertexAttribArray(0);
-    glVertexAttribBinding(0, 0);
+	glVertexAttribBinding(0, 0);
+	glVertexAttribFormat(1, 3, GL_FLOAT, GL_FALSE, 0);//The param is 3 float long, it will contain the normal direction of the vertice
+	glEnableVertexAttribArray(1);
+	glVertexAttribBinding(1, 0);
+	glVertexAttribFormat(2, 2, GL_FLOAT, GL_FALSE, 0);//The param is 2 float long, it will contain the uv of the vertice
+	glEnableVertexAttribArray(2);
+	glVertexAttribBinding(2, 0);
 
     unbind(); //unbinding the VAO
 }
@@ -42,7 +49,7 @@ void Mesh::setVertices(const float *vertices, size_t size) {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	bind();
-	glBindVertexBuffer(0,_vbo,0,3*sizeof(GLfloat)); //binding the newly created vertex buffer to the VAO of the material
+	glBindVertexBuffer(0,_vbo,0,8*sizeof(GLfloat)); //binding the newly created vertex buffer to the VAO of the material
 	unbind();
 }
 

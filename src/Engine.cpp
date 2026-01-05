@@ -69,27 +69,27 @@ int Engine::initWindow(int width, int height, bool debug) {
     return 1;
 }
 
-bool Engine::preRun()
-{
-
-}
-
 void Engine::run()
 {
-    Shader shader("firstShader");
+    Shader firstShader("firstShader");
+    Shader shader("phong");
 
     //FIRST MESH
-    Mesh triangleMesh = Mesh();
-    float triangleVertices[] = {
-        -0.5f, -0.5f, 0.0f,
-         0.5f, -0.5f, 0.0f,
-         0.0f,  0.5f, 0.0f
-    };
-    unsigned int triangleIndices[] = {
-        0, 1, 2
-    };
-    triangleMesh.setVertices(triangleVertices, sizeof(triangleVertices) / sizeof(float));
-    triangleMesh.setIndices(triangleIndices, sizeof(triangleIndices) / sizeof(unsigned int));
+    Mesh rectMesh = Mesh();
+    float planeVertices[] = {
+        //X      Y    Z     nX     nY    nZ    uvX    uvY
+        1.0f,  1.0f, 0.0f,  0.0f, 1.0f, 0.0f,  1.0f, 1.0f, // top right
+        1.0f,  -1.0f, 0.0f, 0.0f, 1.0f, 0.0f,  1.0f, 0.0f,  // bottom right
+        -1.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f,  0.0f, 0.0f,  // bottom left
+        -1.0f, 1.0f, 0.0f,  0.0f, 1.0f, 0.0f,  0.0f, 1.0f,   // top left
+};
+    unsigned int planeIndices[] = {  // note that we start from 0!
+        0, 1, 3,   // first triangle
+        1, 2, 3    // second triangle
+};
+
+    rectMesh.setVertices(planeVertices, sizeof(planeVertices) / sizeof(float));
+    rectMesh.setIndices(planeIndices, sizeof(planeIndices) / sizeof(unsigned int));
 
     //FIRST MATERIAL
     glm::vec3 redDiffuse(1.0f, 0.0f, 0.0f);
@@ -98,9 +98,9 @@ void Engine::run()
     float redShininess = 256;
     Material redMaterial(&shader, redAmbient, redDiffuse, redSpecular, redShininess);
 
-    Object triangle = Object(triangleMesh, redMaterial, glm::vec3(0,1,0), glm::vec3(0,0,0), glm::vec3(1,1,1));
+    Object rect = Object(rectMesh, redMaterial, glm::vec3(0.7,0.5,0), glm::vec3(0,0,0), glm::vec3(1,1,1));
 
-    scene.addObject(&triangle);
+    scene.addObject(&rect);
 
 
     std::cout<<"Running the engine\n";
@@ -110,6 +110,7 @@ void Engine::run()
         glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
+        shader.bind();
         scene.drawScene();
 
 
@@ -120,6 +121,7 @@ void Engine::run()
     glfwDestroyWindow(window);
     glfwTerminate();
     std::cout<<"Closing the engine\n";
+    return;
 }
 
 void Engine::oldTest()
